@@ -1,0 +1,15 @@
+<!-- author: rtang -->
+<!-- date: 8-April-2014 -->
+<!-- overriding _group_default.html.erb to not display group key -->
+
+<% # container for all groups in index view -%>
+<div id="groups">
+    <%- @response.groups.each do |g| %>
+        <div class="grouped-documents">
+            <%= render_document_index g.docs %>
+        </div>
+        <%- if g.total > @response.group_limit %>
+            <%= link_to t('blacklight.search.group.possible_duplicates'), add_group_facet_params_and_redirect(g), :class => 'more-in-group' %>
+        <%- end %>
+    <%- end %>
+</div>
